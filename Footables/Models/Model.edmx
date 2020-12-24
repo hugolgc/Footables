@@ -1,0 +1,502 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Equipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="acronyme" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="points" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="niveau" Type="int" Nullable="false" />
+          <Property Name="figure" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="Joueur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="age" Type="int" Nullable="false" />
+          <Property Name="id_equipe" Type="int" Nullable="false" />
+          <Property Name="id_poste" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="debut" Type="datetime" Nullable="false" />
+          <Property Name="fin" Type="datetime" />
+          <Property Name="lieu" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Poste">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="libelle" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatEquipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="but" Type="int" Nullable="false" />
+          <Property Name="etat" Type="int" Nullable="false" />
+          <Property Name="domicile" Type="int" Nullable="false" />
+          <Property Name="possession" Type="int" Nullable="false" />
+          <Property Name="hors_jeu" Type="int" Nullable="false" />
+          <Property Name="corner" Type="int" Nullable="false" />
+          <Property Name="id_equipe" Type="int" Nullable="false" />
+          <Property Name="id_match" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StatJoueur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="but" Type="int" Nullable="false" />
+          <Property Name="decisive" Type="int" Nullable="false" />
+          <Property Name="tir" Type="int" Nullable="false" />
+          <Property Name="cadre" Type="int" Nullable="false" />
+          <Property Name="interception" Type="int" Nullable="false" />
+          <Property Name="tacle" Type="int" Nullable="false" />
+          <Property Name="faute" Type="int" Nullable="false" />
+          <Property Name="jaune" Type="int" Nullable="false" />
+          <Property Name="rouge" Type="int" Nullable="false" />
+          <Property Name="arret" Type="int" Nullable="false" />
+          <Property Name="encaisse" Type="int" Nullable="false" />
+          <Property Name="id_joueur" Type="int" Nullable="false" />
+          <Property Name="id_match" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Joueur_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Joueur">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Joueur_Poste">
+          <End Role="Poste" Type="Self.Poste" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poste">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Joueur">
+              <PropertyRef Name="id_poste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatEquipe_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatEquipe" Type="Self.StatEquipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatEquipe">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatEquipe_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatEquipe" Type="Self.StatEquipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatEquipe">
+              <PropertyRef Name="id_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatJoueur_Joueur">
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatJoueur" Type="Self.StatJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Joueur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatJoueur">
+              <PropertyRef Name="id_joueur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatJoueur_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatJoueur" Type="Self.StatJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatJoueur">
+              <PropertyRef Name="id_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseModelStoreContainer">
+          <EntitySet Name="Equipe" EntityType="Self.Equipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Joueur" EntityType="Self.Joueur" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Match" EntityType="Self.Match" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Poste" EntityType="Self.Poste" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatEquipe" EntityType="Self.StatEquipe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StatJoueur" EntityType="Self.StatJoueur" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Joueur_Equipe" Association="Self.FK_Joueur_Equipe">
+            <End Role="Equipe" EntitySet="Equipe" />
+            <End Role="Joueur" EntitySet="Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Joueur_Poste" Association="Self.FK_Joueur_Poste">
+            <End Role="Poste" EntitySet="Poste" />
+            <End Role="Joueur" EntitySet="Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatEquipe_Equipe" Association="Self.FK_StatEquipe_Equipe">
+            <End Role="Equipe" EntitySet="Equipe" />
+            <End Role="StatEquipe" EntitySet="StatEquipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatEquipe_Match" Association="Self.FK_StatEquipe_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="StatEquipe" EntitySet="StatEquipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatJoueur_Joueur" Association="Self.FK_StatJoueur_Joueur">
+            <End Role="Joueur" EntitySet="Joueur" />
+            <End Role="StatJoueur" EntitySet="StatJoueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatJoueur_Match" Association="Self.FK_StatJoueur_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="StatJoueur" EntitySet="StatJoueur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Equipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="acronyme" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="points" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="niveau" Type="Int32" Nullable="false" />
+          <Property Name="figure" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Joueur" Relationship="Self.FK_Joueur_Equipe" FromRole="Equipe" ToRole="Joueur" />
+          <NavigationProperty Name="StatEquipe" Relationship="Self.FK_StatEquipe_Equipe" FromRole="Equipe" ToRole="StatEquipe" />
+        </EntityType>
+        <EntityType Name="Joueur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="age" Type="Int32" Nullable="false" />
+          <Property Name="id_equipe" Type="Int32" Nullable="false" />
+          <Property Name="id_poste" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipe" Relationship="Self.FK_Joueur_Equipe" FromRole="Joueur" ToRole="Equipe" />
+          <NavigationProperty Name="Poste" Relationship="Self.FK_Joueur_Poste" FromRole="Joueur" ToRole="Poste" />
+          <NavigationProperty Name="StatJoueur" Relationship="Self.FK_StatJoueur_Joueur" FromRole="Joueur" ToRole="StatJoueur" />
+        </EntityType>
+        <EntityType Name="Match">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="debut" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="fin" Type="DateTime" Precision="3" />
+          <Property Name="lieu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="StatEquipe" Relationship="Self.FK_StatEquipe_Match" FromRole="Match" ToRole="StatEquipe" />
+          <NavigationProperty Name="StatJoueur" Relationship="Self.FK_StatJoueur_Match" FromRole="Match" ToRole="StatJoueur" />
+        </EntityType>
+        <EntityType Name="Poste">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Joueur" Relationship="Self.FK_Joueur_Poste" FromRole="Poste" ToRole="Joueur" />
+        </EntityType>
+        <EntityType Name="StatEquipe">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="but" Type="Int32" Nullable="false" />
+          <Property Name="etat" Type="Int32" Nullable="false" />
+          <Property Name="domicile" Type="Int32" Nullable="false" />
+          <Property Name="possession" Type="Int32" Nullable="false" />
+          <Property Name="hors_jeu" Type="Int32" Nullable="false" />
+          <Property Name="corner" Type="Int32" Nullable="false" />
+          <Property Name="id_equipe" Type="Int32" Nullable="false" />
+          <Property Name="id_match" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipe" Relationship="Self.FK_StatEquipe_Equipe" FromRole="StatEquipe" ToRole="Equipe" />
+          <NavigationProperty Name="Match" Relationship="Self.FK_StatEquipe_Match" FromRole="StatEquipe" ToRole="Match" />
+        </EntityType>
+        <EntityType Name="StatJoueur">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="but" Type="Int32" Nullable="false" />
+          <Property Name="decisive" Type="Int32" Nullable="false" />
+          <Property Name="tir" Type="Int32" Nullable="false" />
+          <Property Name="cadre" Type="Int32" Nullable="false" />
+          <Property Name="interception" Type="Int32" Nullable="false" />
+          <Property Name="tacle" Type="Int32" Nullable="false" />
+          <Property Name="faute" Type="Int32" Nullable="false" />
+          <Property Name="jaune" Type="Int32" Nullable="false" />
+          <Property Name="rouge" Type="Int32" Nullable="false" />
+          <Property Name="arret" Type="Int32" Nullable="false" />
+          <Property Name="encaisse" Type="Int32" Nullable="false" />
+          <Property Name="id_joueur" Type="Int32" Nullable="false" />
+          <Property Name="id_match" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Joueur" Relationship="Self.FK_StatJoueur_Joueur" FromRole="StatJoueur" ToRole="Joueur" />
+          <NavigationProperty Name="Match" Relationship="Self.FK_StatJoueur_Match" FromRole="StatJoueur" ToRole="Match" />
+        </EntityType>
+        <Association Name="FK_Joueur_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Joueur">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatEquipe_Equipe">
+          <End Role="Equipe" Type="Self.Equipe" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatEquipe" Type="Self.StatEquipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipe">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatEquipe">
+              <PropertyRef Name="id_equipe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Joueur_Poste">
+          <End Role="Poste" Type="Self.Poste" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Poste">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Joueur">
+              <PropertyRef Name="id_poste" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatJoueur_Joueur">
+          <End Role="Joueur" Type="Self.Joueur" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatJoueur" Type="Self.StatJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Joueur">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatJoueur">
+              <PropertyRef Name="id_joueur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatEquipe_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatEquipe" Type="Self.StatEquipe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatEquipe">
+              <PropertyRef Name="id_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StatJoueur_Match">
+          <End Role="Match" Type="Self.Match" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="StatJoueur" Type="Self.StatJoueur" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Match">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StatJoueur">
+              <PropertyRef Name="id_match" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Equipe" EntityType="Self.Equipe" />
+          <EntitySet Name="Joueur" EntityType="Self.Joueur" />
+          <EntitySet Name="Match" EntityType="Self.Match" />
+          <EntitySet Name="Poste" EntityType="Self.Poste" />
+          <EntitySet Name="StatEquipe" EntityType="Self.StatEquipe" />
+          <EntitySet Name="StatJoueur" EntityType="Self.StatJoueur" />
+          <AssociationSet Name="FK_Joueur_Equipe" Association="Self.FK_Joueur_Equipe">
+            <End Role="Equipe" EntitySet="Equipe" />
+            <End Role="Joueur" EntitySet="Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatEquipe_Equipe" Association="Self.FK_StatEquipe_Equipe">
+            <End Role="Equipe" EntitySet="Equipe" />
+            <End Role="StatEquipe" EntitySet="StatEquipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Joueur_Poste" Association="Self.FK_Joueur_Poste">
+            <End Role="Poste" EntitySet="Poste" />
+            <End Role="Joueur" EntitySet="Joueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatJoueur_Joueur" Association="Self.FK_StatJoueur_Joueur">
+            <End Role="Joueur" EntitySet="Joueur" />
+            <End Role="StatJoueur" EntitySet="StatJoueur" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatEquipe_Match" Association="Self.FK_StatEquipe_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="StatEquipe" EntitySet="StatEquipe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StatJoueur_Match" Association="Self.FK_StatJoueur_Match">
+            <End Role="Match" EntitySet="Match" />
+            <End Role="StatJoueur" EntitySet="StatJoueur" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DatabaseModelStoreContainer" CdmEntityContainer="DatabaseEntities">
+          <EntitySetMapping Name="Equipe">
+            <EntityTypeMapping TypeName="DatabaseModel.Equipe">
+              <MappingFragment StoreEntitySet="Equipe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="acronyme" ColumnName="acronyme" />
+                <ScalarProperty Name="points" ColumnName="points" />
+                <ScalarProperty Name="niveau" ColumnName="niveau" />
+                <ScalarProperty Name="figure" ColumnName="figure" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Joueur">
+            <EntityTypeMapping TypeName="DatabaseModel.Joueur">
+              <MappingFragment StoreEntitySet="Joueur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="age" ColumnName="age" />
+                <ScalarProperty Name="id_equipe" ColumnName="id_equipe" />
+                <ScalarProperty Name="id_poste" ColumnName="id_poste" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Match">
+            <EntityTypeMapping TypeName="DatabaseModel.Match">
+              <MappingFragment StoreEntitySet="Match">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="debut" ColumnName="debut" />
+                <ScalarProperty Name="fin" ColumnName="fin" />
+                <ScalarProperty Name="lieu" ColumnName="lieu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Poste">
+            <EntityTypeMapping TypeName="DatabaseModel.Poste">
+              <MappingFragment StoreEntitySet="Poste">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="libelle" ColumnName="libelle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatEquipe">
+            <EntityTypeMapping TypeName="DatabaseModel.StatEquipe">
+              <MappingFragment StoreEntitySet="StatEquipe">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="but" ColumnName="but" />
+                <ScalarProperty Name="etat" ColumnName="etat" />
+                <ScalarProperty Name="domicile" ColumnName="domicile" />
+                <ScalarProperty Name="possession" ColumnName="possession" />
+                <ScalarProperty Name="hors_jeu" ColumnName="hors_jeu" />
+                <ScalarProperty Name="corner" ColumnName="corner" />
+                <ScalarProperty Name="id_equipe" ColumnName="id_equipe" />
+                <ScalarProperty Name="id_match" ColumnName="id_match" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StatJoueur">
+            <EntityTypeMapping TypeName="DatabaseModel.StatJoueur">
+              <MappingFragment StoreEntitySet="StatJoueur">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="but" ColumnName="but" />
+                <ScalarProperty Name="decisive" ColumnName="decisive" />
+                <ScalarProperty Name="tir" ColumnName="tir" />
+                <ScalarProperty Name="cadre" ColumnName="cadre" />
+                <ScalarProperty Name="interception" ColumnName="interception" />
+                <ScalarProperty Name="tacle" ColumnName="tacle" />
+                <ScalarProperty Name="faute" ColumnName="faute" />
+                <ScalarProperty Name="jaune" ColumnName="jaune" />
+                <ScalarProperty Name="rouge" ColumnName="rouge" />
+                <ScalarProperty Name="arret" ColumnName="arret" />
+                <ScalarProperty Name="encaisse" ColumnName="encaisse" />
+                <ScalarProperty Name="id_joueur" ColumnName="id_joueur" />
+                <ScalarProperty Name="id_match" ColumnName="id_match" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

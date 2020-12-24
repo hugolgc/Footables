@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Footables - @ViewBag.Title</title>
+        @Styles.Render("~/Content/css")
+    </head>
+    <body class="genesis bg-grey-dark text-white">
+
+
+        <header class="sticky top-0 z-10 py-4 bg-grey-dark border-b border-grey">
+            <nav class="px-8 flex justify-between items-center">
+                <ul class="flex text-lg text-white-bis">
+                    <li class="mr-12 text-white" onclick="window.location = 'home.html'">
+                        Accueil
+                    </li>
+                    <li class="mr-12" onclick="window.location = 'matchs.html'">
+                        Matchs
+                    </li>
+                    <li class="mr-12" onclick="window.location = 'equipes.html'">
+                        Équipes
+                    </li>
+                    <li class="mr-12" onclick="window.location = 'joueurs.html'">
+                        Joueurs
+                    </li>
+                    <li>
+                        Github
+                    </li>
+                </ul>
+                <div class="relative h-10 px-4 items-center bg-grey rounded-lg hidden lg:flex">
+                    <ion-icon name="search-outline" class="pt-1 pr-3 text-lg"></ion-icon>
+                    <input id="search" name="search" type="text" placeholder="Joueur, équipe" maxlength="50" class="h-10 w-48 text-sm font-light bg-transparent outline-none">
+                    <div class="hidden absolute top-12 left-0 right-0 bg-grey-darker border border-grey divide-y divide-gray-700 rounded-lg shadow-2xl">
+                        <ul class="px-4 py-3">
+                            <li>
+                                <a href="" class="block flex items-center py-1">
+                                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                    <h3 class="text-white font-light">Hugo Lagache</h3>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="px-4 py-3">
+                            <li>
+                                <a href="" class="block flex items-center py-1">
+                                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                    <h3 class="text-white font-light">PSG</h3>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+
+        <div class="flex">
+            <main class="p-4 flex flex-auto">
+                <div class="w-80 flex-none hidden lg:block">
+                    <!-- Gauche -->
+
+                    <div class="p-4">
+                        <section class="px-4 py-2 bg-grey rounded-xl">
+                            <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                <h2 class="font-medium">Country</h2>
+                                <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
+                            </header>
+                            <div id="ranking">
+
+                                @for (int i = 0; i < 7; i++) {
+
+                                <div class="py-2 flex justify-between items-center animate-pulse">
+                                    <div class="flex items-center">
+                                        <div class="h-6 w-6 bg-purple-gradient rounded-full mr-3"></div>
+                                        <div class="h-2 w-24 bg-purple-gradient rounded-full"></div>
+                                    </div>
+                                    <div class="h-4 w-8 bg-purple-gradient rounded-full"></div>
+                                </div>
+
+                                }
+
+                            </div>
+                        </section>
+                    </div>
+
+                    <div class="p-4">
+                        <div class="swiper-container bg-grey rounded-xl">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <section class="px-4 py-2">
+                                        <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                            <h2 class="font-medium">Country</h2>
+                                            <div class="flex item-center text-indigo-400">
+                                                <span class="text-xs font-bold pr-1">GLISSER</span>
+                                                <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+                                            </div>
+                                        </header>
+                                        <div class="py-2 flex justify-between items-center animate-pulse">
+                                            <div class="flex items-center">
+                                                <div class="h-6 w-6 bg-purple-gradient rounded-full mr-3"></div>
+                                                <div class="h-2 w-24 bg-purple-gradient rounded-full"></div>
+                                            </div>
+                                            <div class="h-4 w-8 bg-purple-gradient rounded-full"></div>
+                                        </div>
+                                        <article class="py-2 flex justify-between items-center">
+                                            <div class="flex items-center">
+                                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 mr-3">
+                                                <h3 class="text-white font-light">France</h3>
+                                            </div>
+                                            <p class="text-white-bis">322</p>
+                                        </article>
+                                        <article class="py-2 flex justify-between items-center">
+                                            <div class="flex items-center">
+                                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 mr-3">
+                                                <h3 class="text-white font-light">France</h3>
+                                            </div>
+                                            <p class="text-white-bis">322</p>
+                                        </article>
+                                    </section>
+                                </div>
+                                <div class="swiper-slide">
+                                    <section class="px-4 py-2">
+                                        <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                            <h2 class="font-medium">Country</h2>
+                                            <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
+                                        </header>
+                                        <div class="py-2 flex justify-between items-center animate-pulse">
+                                            <div class="flex items-center">
+                                                <div class="h-6 w-6 bg-purple-gradient rounded-full mr-3"></div>
+                                                <div class="h-2 w-24 bg-purple-gradient rounded-full"></div>
+                                            </div>
+                                            <div class="h-4 w-8 bg-purple-gradient rounded-full"></div>
+                                        </div>
+                                        <article class="py-2 flex justify-between items-center">
+                                            <div class="flex items-center">
+                                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                                <h3 class="text-white font-light">France</h3>
+                                            </div>
+                                            <p class="text-white-bis">322</p>
+                                        </article>
+                                        <article class="py-2 flex justify-between items-center">
+                                            <div class="flex items-center">
+                                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                                <h3 class="text-white font-light">France</h3>
+                                            </div>
+                                            <p class="text-white-bis">322</p>
+                                        </article>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex-auto">
+
+                    @RenderBody()
+
+                </div>
+            </main>
+            <aside class="w-80 min-h-content sticky top-73 p-4 flex-none bg-grey-darker border-l border-grey hidden xl:block">
+
+                <div class="p-4">
+                    <section class="px-4 py-2 bg-grey rounded-xl">
+                        <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                            <h2 class="font-medium">Country</h2>
+                            <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
+                        </header>
+                        <div class="py-2 flex justify-between items-center animate-pulse">
+                            <div class="flex items-center">
+                                <div class="h-6 w-6 bg-purple-gradient rounded-full mr-3"></div>
+                                <div class="h-2 w-24 bg-purple-gradient rounded-full"></div>
+                            </div>
+                            <div class="h-4 w-8 bg-purple-gradient rounded-full"></div>
+                        </div>
+                        <article class="py-2 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                <h3 class="text-white font-light">France</h3>
+                            </div>
+                            <p class="text-white-bis">322</p>
+                        </article>
+                        <article class="py-2 flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                                <h3 class="text-white font-light">France</h3>
+                            </div>
+                            <p class="text-white-bis">322</p>
+                        </article>
+                    </section>
+                </div>
+
+            </aside>
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@5.2.3/dist/ionicons/ionicons.esm.js"></script>
+
+        @Scripts.Render("~/bundles/js")
+        @RenderSection("scripts", required: false)
+
+    </body>
+</html>

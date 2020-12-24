@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Footables.Models.StatJoueur>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.but)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.decisive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tir)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cadre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.interception)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.tacle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.faute)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jaune)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.rouge)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.arret)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.encaisse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Joueur.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Match.lieu)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.but)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.decisive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tir)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cadre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.interception)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.tacle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.faute)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jaune)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.rouge)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.arret)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.encaisse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Joueur.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Match.lieu)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

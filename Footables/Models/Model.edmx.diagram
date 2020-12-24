@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="081dcc7d76ff46fdaa6bf39ea342130a" Name="Diagram1">
+        <EntityTypeShape EntityType="DatabaseModel.Equipe" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Joueur" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Match" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.Poste" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.StatEquipe" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DatabaseModel.StatJoueur" Width="1.5" PointX="8.25" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="DatabaseModel.FK_Joueur_Equipe" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_StatEquipe_Equipe" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_Joueur_Poste" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_StatJoueur_Joueur" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_StatEquipe_Match" ManuallyRouted="false" />
+        <AssociationConnector Association="DatabaseModel.FK_StatJoueur_Match" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

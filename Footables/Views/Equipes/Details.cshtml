@@ -1,0 +1,58 @@
+﻿@model Footables.Models.Equipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Equipe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.acronyme)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.acronyme)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.points)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.points)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.niveau)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.niveau)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.figure)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.figure)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

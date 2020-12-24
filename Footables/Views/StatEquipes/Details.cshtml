@@ -1,0 +1,82 @@
+﻿@model Footables.Models.StatEquipe
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>StatEquipe</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.but)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.but)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.domicile)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.domicile)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.possession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.possession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.hors_jeu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.hors_jeu)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.corner)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.corner)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Equipe.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Equipe.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Match.lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Match.lieu)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

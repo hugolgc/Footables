@@ -1,0 +1,55 @@
+.bg-grey-darker {
+  background-color: #272b36;
+}
+
+.bg-grey-dark {
+  background-color: #303241;
+}
+
+.bg-grey {
+  background-color: #3a3c4a;
+}
+
+.bg-grey-bis {
+  background-color: #333541;
+}
+
+.bg-purple-gradient {
+  background: linear-gradient(to bottom right, #635dd4, #615cc7);
+}
+
+.text-white-bis {
+  color: rgba(255, 255, 255, .5);
+}
+
+.border-grey {
+  border-color: #444651;
+}
+
+.border-grey-bis {
+  border-color: #333541;
+}
+
+.border-grey-dark {
+  border-color: #333541;
+}
+
+.min-h-content {
+  height: calc(100vh - 73px);
+}
+
+.top-73 {
+  top: 73px;
+}
+
+.top-12 {
+  top: 3rem;
+}
+
+.bg-variant:nth-child(2n + 1) {
+  background-color: #333541;
+}
+
+.form-control {
+    background-color: #000;
+}

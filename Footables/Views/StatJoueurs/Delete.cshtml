@@ -1,0 +1,128 @@
+﻿@model Footables.Models.StatJoueur
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>StatJoueur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.but)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.but)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.decisive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.decisive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tir)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tir)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cadre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cadre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.interception)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.interception)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.tacle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.tacle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.faute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.faute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.jaune)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.jaune)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rouge)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rouge)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.arret)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.arret)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.encaisse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.encaisse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Joueur.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Joueur.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Match.lieu)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Match.lieu)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
