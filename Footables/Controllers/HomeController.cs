@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Footables.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,11 @@ namespace Footables.Controllers
 {
     public class HomeController : Controller
     {
+        private DatabaseEntities db = new DatabaseEntities();
+
         public ActionResult Index()
         {
-            return View();
+            return View(db.Match.OrderByDescending(match => match.debut).Take(5).ToList());
         }
 
         public ActionResult About()

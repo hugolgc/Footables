@@ -10,14 +10,60 @@ using Footables.Models;
 
 namespace Footables.Controllers
 {
+    public partial class MainEquipe
+    {
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public string Figure
+        {
+            get;
+            set;
+        }
+
+        public string Nom
+        {
+            get;
+            set;
+        }
+
+        public string Points
+        {
+            get;
+            set;
+        }
+    }
+
     public class EquipesController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
 
-        // GET: Ranking
+        // GET: Equipes/Ranking
         public JsonResult Ranking()
         {
-            return Json(db.Equipe.OrderByDescending(equipe => equipe.points).ToList(), JsonRequestBehavior.AllowGet);
+            /* 
+             * Une grosse erreur de sérialisation empêche d'utiliser :
+             * db.Equipe.OrderByDescending(e => e.points).ToList();
+             * 
+             * En utilisant MainEquipe comme alternative à peu près élégante, je récupère
+             * uniquement le contenu nécéssaire, et non les autres entités lié à Equipe.
+             * 
+             * Néanmoins, ça serait avec plaisir d'avoir votre explication ^^
+             */
+
+            var equipes = from equipe in db.Equipe
+                          select new MainEquipe
+                          {
+                              Id = equipe.Id,
+                              Figure = equipe.figure,
+                              Nom = equipe.nom,
+                              Points = equipe.points
+                          };
+
+            return Json(equipes, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Equipes

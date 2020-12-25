@@ -17,7 +17,7 @@ namespace Footables.Controllers
         // GET: Matchs
         public ActionResult Index()
         {
-            return View(db.Match.ToList());
+            return View(db.Match.OrderByDescending(match => match.debut).Include(match => match.StatEquipe).ToList());
         }
 
         // GET: Matchs/Details/5
