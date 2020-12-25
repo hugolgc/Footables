@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Footables - @ViewBag.Title</title>
+        <title>Footables | @ViewBag.Title</title>
         @Styles.Render("~/Content/css")
     </head>
     <body class="genesis bg-grey-dark text-white">
@@ -63,7 +63,7 @@
                     <div class="p-4">
                         <section class="px-4 py-2 bg-grey rounded-xl">
                             <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
-                                <h2 class="font-medium">Country</h2>
+                                <h2 class="font-medium">@Html.ActionLink("Classement", "Index", "Equipes")</h2>
                                 <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
                             </header>
                             <div id="ranking">

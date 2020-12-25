@@ -22,7 +22,9 @@
 
 <div class="p-4">
     <section class="bg-grey rounded-xl overflow-hidden">
-        <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Matchs</h2>
+        <a href="@Url.Action("Index", "Matchs")">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Matchs</h2>
+        </a>
         <header class="flex items-center p-2 text-white-bis text-center font-light border-b border-grey-dark">
             <p class="w-2/12 px-2">Date</p>
             <p class="w-2/12 px-2">Score</p>
@@ -32,60 +34,58 @@
 
         @foreach (var itemMatch in Model) {
 
-        <article class="flex items-center px-2 py-2 bg-variant">
+        <a class="block bg-variant" href="@Url.Action("Details", "Matchs", new { id = itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().id_match })">
+            <article class="flex items-center px-2 py-2">
 
-            @{
-                DateTime matchDate = Convert.ToDateTime(itemMatch.debut);
+                @{
+                    DateTime matchDate = Convert.ToDateTime(itemMatch.debut);
 
-                if (matchDate.ToShortDateString() == DateTime.Now.ToShortDateString()) {
+                    if (matchDate.ToShortDateString() == DateTime.Now.ToShortDateString()) {
 
-                <p class="w-2/12 p-2 text-center font-light">@matchDate.ToShortTimeString()</p>
+                    <p class="w-2/12 p-2 text-center font-light">@matchDate.ToShortTimeString()</p>
 
-                } else {
+                    } else {
 
-                <p class="w-2/12 p-2 text-center font-light">@matchDate.ToString("dd MMMM")</p>
+                    <p class="w-2/12 p-2 text-center font-light">@matchDate.ToString("dd MMMM")</p>
 
+                    }
                 }
-            }
 
             
 
-            @if (itemMatch.fin == null) {
+                @if (itemMatch.fin == null) {
 
-            <p class="w-2/12 p-2 text-center font-light">- : -</p>
+                <p class="w-2/12 p-2 text-center font-light">- : -</p>
 
-            } else {
+                } else {
 
-            <p class="w-2/12 px-2 text-center text-xl">
-                <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().but</span>
-                <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().but</span>
-            </p>
+                <p class="w-2/12 px-2 text-center text-xl">
+                    <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().but</span>
+                    <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().but</span>
+                </p>
 
-            }
+                }
 
-            <div class="w-4/12 px-2">
-                <a href="@Url.Action("Details", "Equipes", new { id = itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().id_equipe })">
+                <div class="w-4/12 px-2">
                     <div class="flex items-center py-1">
                         <img src="@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.figure" alt="Logo @itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.nom" class="h-6 w-6 mr-3">
                         <h3 class="text-white-bis font-light">@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.nom</h3>
                     </div>
-                </a>
-                <a href="@Url.Action("Details", "Equipes", new { id = itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().id_equipe })">
                     <div class="flex items-center py-1">
                         <img src="@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.figure" alt="Logo @itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.nom" class="h-6 w-6 mr-3">
                         <h3 class="text-white-bis font-light">@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.nom</h3>
                     </div>
-                </a>
-            </div>
+                </div>
 
-            @{ List<double> cotes = Footables.Models.Utils.getCotes(itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.niveau, itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.niveau); }
+                @{ List<double> cotes = Footables.Models.Utils.getCotes(itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.niveau, itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.niveau); }
 
-            <div class="w-4/12 px-2 flex justify-center">
-                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">@Math.Round(cotes[0], 2)</p>
-                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">@Math.Round(cotes[1], 2)</p>
-                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">@Math.Round(cotes[2], 2)</p>
-            </div>
-        </article>
+                <div class="w-4/12 px-2 flex justify-center text-sm">
+                    <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-md">@Math.Round(cotes[0], 2)</p>
+                    <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-md mx-4">@Math.Round(cotes[1], 2)</p>
+                    <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-md">@Math.Round(cotes[2], 2)</p>
+                </div>
+            </article>
+        </a>
 
         }
 

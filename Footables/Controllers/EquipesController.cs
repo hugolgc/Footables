@@ -41,8 +41,8 @@ namespace Footables.Controllers
     {
         private DatabaseEntities db = new DatabaseEntities();
 
-        // GET: Equipes/Ranking
-        public JsonResult Ranking()
+        // GET: Equipes/Classement
+        public JsonResult Classement()
         {
             /* 
              * Une grosse erreur de sérialisation empêche d'utiliser :

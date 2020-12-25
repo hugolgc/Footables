@@ -1,42 +1,210 @@
 ﻿@model Footables.Models.Match
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = @Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.acronyme + " - " + @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.acronyme;
 }
 
-<h2>Details</h2>
+<article class="px-4">
+    <div class="py-4">
+        <header class="flex items-center p-8 bg-grey rounded-xl overflow-hidden">
+            <div class="flex-1">
+                <img src="@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.figure" alt="Logo @Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.nom" class="h-32 mx-auto mb-4">
+                <h2 class="flex justify-center items-center">
+                    <ion-icon name="flag-outline" class="pr-2"></ion-icon>
+                    <span class="block text-lg font-light">@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.nom</span>
+                </h2>
+            </div>
+            <div class="flex-1 text-center">
 
-<div>
-    <h4>Match</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.debut)
-        </dt>
+                @{ DateTime matchDate = Convert.ToDateTime(Model.debut); }
 
-        <dd>
-            @Html.DisplayFor(model => model.debut)
-        </dd>
+                <p class="text-lg font-light">@matchDate.ToString("dd MMMM yyyy")</p>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.fin)
-        </dt>
+                @if (Model.fin == null) {
 
-        <dd>
-            @Html.DisplayFor(model => model.fin)
-        </dd>
+               
 
-        <dt>
-            @Html.DisplayNameFor(model => model.lieu)
-        </dt>
+                <p class="text-6xl font-semibold mb-2">@matchDate.ToShortTimeString()</p>
 
-        <dd>
-            @Html.DisplayFor(model => model.lieu)
-        </dd>
+                } else { 
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+                <p class="text-6xl font-semibold mb-2">@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().but : @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().but</p>
+                
+                }
+                
+                <p class="text-white-bis font-light">@Model.lieu</p>
+            </div>
+            <div class="flex-1">
+                <img src="@Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.figure" alt="Logo @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.nom" class="h-32 mx-auto mb-4">
+                <h2 class="flex justify-center items-center">
+                    <span class="block text-lg font-light">@Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.nom</span>
+                </h2>
+            </div>
+        </header>
+    </div>
+
+    @if (Model.fin != null) {
+
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Statistiques</h2>
+            <div>
+                <div class="bg-variant px-2 py-1 text-white-bis text-center">
+                    <h3 class="pt-1 font-light">Possession de balle</h3>
+                    <div class="flex items-center py-1">
+                        <p class="w-2/12 px-2">@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().possession%</p>
+                        <div class="w-full flex justify-between overflow-hidden rounded-lg mx-2">
+                            <div class="h-3 bg-indigo-600" style="width: @Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().possession%;"></div>
+                            <div class="h-3 bg-indigo-800" style="width: @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().possession%;"></div>
+                        </div>
+                        <p class="w-2/12 px-2">@Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().possession%</p>
+                    </div>
+                </div>
+
+                @{
+                    int horsDomicile = Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().hors_jeu;
+                    int horsExterieur = Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().hors_jeu;
+                    int horstotal = horsDomicile + horsExterieur;
+                }
+
+                <div class="bg-variant px-2 py-1 text-white-bis text-center">
+                    <h3 class="pt-1 font-light">Hors-jeu</h3>
+                    <div class="flex items-center py-1">
+
+                        @if (horstotal > 0) {
+
+                        <p class="w-2/12 px-2">@horsDomicile</p>
+                        <div class="w-full flex justify-between overflow-hidden rounded-lg mx-2">
+                            <div class="h-3 bg-indigo-600" style="width: @((horsDomicile / horstotal) * 100)%;"></div>
+                            <div class="h-3 bg-indigo-800" style="width: @((horsExterieur / horstotal) * 100)%;"></div>
+                        </div>
+                        <p class="w-2/12 px-2">@horsExterieur</p>
+
+                        } else {
+
+                        <p class="w-2/12 px-2">0</p>
+                        <div class="w-full flex justify-between overflow-hidden rounded-lg mx-2">
+                            <div class="h-3 bg-indigo-600" style="width: 50%;"></div>
+                            <div class="h-3 bg-indigo-800" style="width: 50%;"></div>
+                        </div>
+                        <p class="w-2/12 px-2">0</p>
+
+                        }
+
+                    </div>
+                </div>
+
+                @{
+                    int cornersDomicile = Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().corner;
+                    int cornersExterieur = Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().corner;
+                    int cornerstotal = cornersDomicile + cornersExterieur;
+                }
+
+                <div class="bg-variant px-2 py-1 text-white-bis text-center">
+                    <h3 class="pt-1 font-light">Corners</h3>
+                    <div class="flex items-center py-1">
+
+                        @if (cornerstotal > 0) {
+
+                        <p class="w-2/12 px-2">@cornersDomicile</p>
+                        <div class="w-full flex justify-between overflow-hidden rounded-lg mx-2">
+                            <div class="h-3 bg-indigo-600" style="width: @((cornersDomicile / cornerstotal) * 100)%;"></div>
+                            <div class="h-3 bg-indigo-800" style="width: @((cornersExterieur / cornerstotal) * 100)%;"></div>
+                        </div>
+                        <p class="w-2/12 px-2">@cornersExterieur</p>
+
+                        } else {
+
+                        <p class="w-2/12 px-2">0</p>
+                        <div class="w-full flex justify-between overflow-hidden rounded-lg mx-2">
+                            <div class="h-3 bg-indigo-600" style="width: 50%;"></div>
+                            <div class="h-3 bg-indigo-800" style="width: 50%;"></div>
+                        </div>
+                        <p class="w-2/12 px-2">0</p>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    }
+
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Compositions</h2>
+            <div class="flex bg-grey-bis">
+                <ul class="w-1/2 flex-none px-8 py-4">
+
+                    @foreach (var joueur in Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.Joueur.ToList())
+                    {
+
+                    <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })">
+                        <li class="py-2">
+                            <p class="text-white-bis font-light">@joueur.Poste.libelle</p>
+                            <h3 class="text-lg font-semibold">@joueur.nom</h3>
+                        </li>
+                    </a>
+
+                    }
+
+                    </ul>
+                <ul class="w-1/2 flex-none px-8 py-4">
+
+
+                    @foreach (var joueur in Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.Joueur.ToList()) {
+
+                    <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })">
+                        <li class="py-2">
+                            <p class="text-white-bis font-light">@joueur.Poste.libelle</p>
+                            <h3 class="text-lg font-semibold">@joueur.nom</h3>
+                        </li>
+                    </a>
+
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>Match</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.debut)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.debut)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fin)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.lieu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.lieu)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

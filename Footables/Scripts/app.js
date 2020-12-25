@@ -2,7 +2,7 @@ $(() => {
 
     const slider = new Swiper('.swiper-container')
 
-    $.get('/Equipes/Ranking', data => {
+    $.get('/Equipes/Classement', data => {
         $('#ranking').html('')
         data.map(equipe => {
             $('#ranking').append(`
