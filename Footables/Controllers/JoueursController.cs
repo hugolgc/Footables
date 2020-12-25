@@ -17,8 +17,17 @@ namespace Footables.Controllers
         // GET: Joueurs
         public ActionResult Index()
         {
-            var joueur = db.Joueur.Include(j => j.Equipe).Include(j => j.Poste);
-            return View(joueur.ToList());
+            List<Joueur> joueurs = new List<Joueur>();
+            Random rand = new Random(DateTime.Now.ToString().GetHashCode());
+
+            int count = db.Joueur.Count();
+
+            for (int i = 0; i < count; i++)
+            {
+                joueurs.Add(db.Joueur.Find(rand.Next(0, (count))));
+            }
+
+            return View(joueurs.Take(10));
         }
 
         // GET: Joueurs/Details/5

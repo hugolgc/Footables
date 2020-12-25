@@ -17,14 +17,13 @@ namespace Footables.Controllers
         // GET: Ranking
         public JsonResult Ranking()
         {
-            var equipes = db.Equipe.OrderByDescending(equipe => equipe.points);
-            return Json(equipes.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(db.Equipe.OrderByDescending(equipe => equipe.points).ToList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Equipes
         public ActionResult Index()
         {
-            return View(db.Equipe.ToList());
+            return View(db.Equipe.OrderByDescending(equipe => equipe.points).ToList());
         }
 
         // GET: Equipes/Details/5

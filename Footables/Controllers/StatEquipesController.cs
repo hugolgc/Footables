@@ -55,6 +55,19 @@ namespace Footables.Controllers
             {
                 db.StatEquipe.Add(statEquipe);
                 db.SaveChanges();
+
+                StatJoueur statJoueur = new StatJoueur();
+                statJoueur.id_match = statEquipe.id_match;
+
+                List<int> joueurs_id = db.Joueur.Where(joueur => joueur.id_equipe == statEquipe.id_equipe).Select(item => item.Id).ToList();
+
+                foreach (var item in joueurs_id)
+                {
+                    statJoueur.id_joueur = item;
+                    db.StatJoueur.Add(statJoueur);
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Index");
             }
 

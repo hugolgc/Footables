@@ -1,31 +1,113 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Accueil";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+<div class="p-4">
+    <section class="flex bg-purple-gradient rounded-xl">
+        <div class="pl-8 py-6 flex-auto">
+            <h1 class="text-xl font-medium">Projet Footables. Créé par <a href="https://github.com/dijerosso59" target="_blank">Luca</a> et <a href="https://github.com/hugolgc" target="_blank">Hugo</a>.</h1>
+            <p class="max-w-sm text-purple-300 font-light mt-4 mb-16">Développé en ASP.NET et les frameworks Tailwind css et jQuery.</p>
+            <div class="flex">
+                <a href="https://github.com/hugolgc/Footables" target="_blank" class="block px-10 py-2 bg-white text-indigo-700 text-sm font-light rounded-lg hover:bg-indigo-900 hover:text-white duration-200">GITHUB</a>
+            </div>
+        </div>
+        <div class="w-5/12 xl:w-1/3 2xl:w-5/12 flex-none hidden md:flex">
+            <img src="https://raw.githubusercontent.com/hugolgc/maquette_foot/master/banner.png" alt="Bannière Footables" class="mt-auto mx-auto h-56">
+        </div>
+    </section>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+
+<div class="p-4">
+    <section class="bg-grey rounded-xl overflow-hidden">
+        <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Matchs</h2>
+        <header class="flex items-center p-2 text-white-bis text-center font-light border-b border-grey-dark">
+            <p class="w-2/12 px-2">Date</p>
+            <p class="w-2/12 px-2">Score</p>
+            <p class="w-4/12 px-2">Match</p>
+            <p class="w-4/12 px-2">Cotes</p>
+        </header>
+        <article class="flex items-center px-2 py-2 bg-variant">
+            <p class="w-2/12 p-2 text-center font-light">22:00</p>
+            <p class="w-2/12 p-2 text-center font-light">- : -</p>
+            <div class="w-4/12 px-2">
+                <div class="flex items-center py-1">
+                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                </div>
+                <div class="flex items-center py-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg" alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                </div>
+            </div>
+            <div class="w-4/12 px-2 flex justify-center">
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+            </div>
+        </article>
+        <article class="flex items-center px-2 py-2 bg-variant">
+            <p class="w-2/12 p-2 text-center font-light">Jeudi</p>
+            <p class="w-2/12 px-2 text-center text-xl">
+                <span class="block">1</span>
+                <span class="block">2</span>
+            </p>
+            <div class="w-4/12 px-2">
+                <div class="flex items-center py-1">
+                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                </div>
+                <div class="flex items-center py-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg" alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                </div>
+            </div>
+            <div class="w-4/12 px-2 flex justify-center">
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+            </div>
+        </article>
+        <article class="flex items-center px-2 py-2 bg-variant">
+            <p class="w-2/12 p-2 text-center font-light">22:00</p>
+            <p class="w-2/12 p-2 text-center font-light">- : -</p>
+            <div class="w-4/12 px-2">
+                <div class="flex items-center py-1">
+                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                </div>
+                <div class="flex items-center py-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg" alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                </div>
+            </div>
+            <div class="w-4/12 px-2 flex justify-center">
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+            </div>
+        </article>
+        <article class="flex items-center px-2 py-2 bg-variant">
+            <p class="w-2/12 p-2 text-center font-light">Jeudi</p>
+            <p class="w-2/12 px-2 text-center text-xl">
+                <span class="block">1</span>
+                <span class="block">2</span>
+            </p>
+            <div class="w-4/12 px-2">
+                <div class="flex items-center py-1">
+                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                </div>
+                <div class="flex items-center py-1">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg" alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                </div>
+            </div>
+            <div class="w-4/12 px-2 flex justify-center">
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+            </div>
+        </article>
+    </section>
 </div>

@@ -13,20 +13,20 @@
         <header class="sticky top-0 z-10 py-4 bg-grey-dark border-b border-grey">
             <nav class="px-8 flex justify-between items-center">
                 <ul class="flex text-lg text-white-bis">
-                    <li class="mr-12 text-white" onclick="window.location = 'home.html'">
-                        Accueil
-                    </li>
-                    <li class="mr-12" onclick="window.location = 'matchs.html'">
-                        Matchs
-                    </li>
-                    <li class="mr-12" onclick="window.location = 'equipes.html'">
-                        Équipes
-                    </li>
-                    <li class="mr-12" onclick="window.location = 'joueurs.html'">
-                        Joueurs
-                    </li>
+                    <li class="mr-12 @if (ViewBag.Title == "Accueil") {
+                        @: text-white
+                    }">@Html.ActionLink("Accueil", "Index", "Home")</li>
+                    <li class="mr-12 @if (ViewBag.Title == "Matchs") {
+                        @: text-white
+                    }">@Html.ActionLink("Matchs", "Index", "Matchs")</li>
+                    <li class="mr-12 @if (ViewBag.Title == "Équipes") {
+                        @: text-white
+                    }">@Html.ActionLink("Équipes", "Index", "Equipes")</li>
+                    <li class="mr-12 @if (ViewBag.Title == "Joueurs") {
+                        @: text-white
+                    }">@Html.ActionLink("Joueurs", "Index", "Joueurs")</li>
                     <li>
-                        Github
+                        <a href="https://github.com/hugolgc/Footables" target="_blank">Github</a>
                     </li>
                 </ul>
                 <div class="relative h-10 px-4 items-center bg-grey rounded-lg hidden lg:flex">
