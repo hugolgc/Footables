@@ -17,22 +17,22 @@
             <p class="w-2/12 px-2">Match gagné</p>
         </header>
 
-        @foreach (var itemEquipe in Model) {
+        @foreach (var equipe in Model) {
         
         <article class="flex items-center px-2 py-2 bg-variant text-center">
-            <a href="@Url.Action("Details", "Equipes", new { id = itemEquipe.Id })" class="block w-4/12 pl-6 pr-2">
+            <a href="@Url.Action("Details", "Equipes", new { id = equipe.Id })" class="block w-4/12 pl-6 pr-2">
                 <div class="flex items-center py-1">
-                    <img src="@itemEquipe.figure" alt="Logo @itemEquipe.nom" class="h-6 w-6 mr-3">
-                    <h3 class="text-white-bis font-light">@itemEquipe.nom</h3>
+                    <img src="@equipe.figure" alt="Logo @equipe.nom" class="h-6 w-6 mr-3">
+                    <h3 class="text-white-bis font-light">@equipe.nom</h3>
                 </div>
             </a>
-            <p class="w-1/12 p-2 text-white-bis">@itemEquipe.points</p>
-            <p class="w-1/12 p-2">@itemEquipe.StatEquipe.Count()</p>
+            <p class="w-1/12 p-2 text-white-bis">@equipe.points</p>
+            <p class="w-1/12 p-2">@equipe.StatEquipe.Count()</p>
 
             @{
-                int victoires = itemEquipe.StatEquipe.Where(stat => stat.etat == 2).Count();
-                int nuls = itemEquipe.StatEquipe.Where(stat => stat.etat == 0).Count();
-                int defaites = itemEquipe.StatEquipe.Where(stat => stat.etat == 1).Count();
+                int victoires = equipe.StatEquipe.Where(stat => stat.etat == 2).Count();
+                int nuls = equipe.StatEquipe.Where(stat => stat.etat == 0).Count();
+                int defaites = equipe.StatEquipe.Where(stat => stat.etat == 1).Count();
                 float total = victoires + nuls + defaites;
             }
 

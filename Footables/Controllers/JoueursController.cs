@@ -36,7 +36,7 @@ namespace Footables.Controllers
             Random rand = new Random(DateTime.Now.ToString().GetHashCode());
             int count = db.Joueur.Count();
 
-            foreach (Joueur joueur in db.Joueur.ToList())
+            for (int i = 0; i < count; i++)
             {
                 joueurs.Add(db.Joueur.Find(rand.Next(0, (count))));
             }
@@ -51,10 +51,8 @@ namespace Footables.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            var joueurs = db.Joueur.Where(joueur => joueur.nom.Contains(search));
-
-            return View(joueurs.Take(10).ToList());
+            ViewBag.search = search;
+            return View(db.Joueur.Where(joueur => joueur.nom.Contains(search)));
         }
 
         /*public ActionResult Index(string? search)

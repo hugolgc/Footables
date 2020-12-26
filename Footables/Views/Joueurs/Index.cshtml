@@ -7,31 +7,42 @@
 <div class="p-4">
     <h2 class="px-8 py-6 bg-grey text-white-bis text-2xl font-semibold rounded-xl mb-8 hidden">Joueurs</h2>
     <section class="bg-grey rounded-xl overflow-hidden">
-        <form action="@Url.Action("Index", "Joueurs")" method="get" class="px-8 py-6 flex items-center border-b border-grey">
+        <form action="@Url.Action("Index", "Joueurs")" method="post" class="px-8 py-6 flex items-center border-b border-grey">
             <ion-icon name="search-outline" class="pt-1 pr-4 text-2xl"></ion-icon>
             <input name="search" type="text" placeholder="Trouver un joueur" maxlength="50" required class="w-full text-xl font-light bg-transparent outline-none">
         </form>
         <header class="flex items-center px-4 py-2 text-white-bis font-light border-b border-grey-dark">
-            <p class="w-3/12 px-2">@ViewBag.gets</p>
+            <p class="w-3/12 px-2">Nom</p>
             <p class="w-3/12 px-2">Poste</p>
             <p class="w-2/12 text-center px-2">Âge</p>
             <p class="w-4/12 px-2">Équipe</p>
         </header>
         <div id="players">
 
-            @foreach (var itemJoueur in Model) {
+            @foreach (var joueur in Model) {
 
             <article class="flex items-center px-4 py-2 bg-variant">
-                <a class="block w-3/12 p-2">@itemJoueur.nom</a>
-                <p class="w-3/12 p-2 font-light text-white-bis">@itemJoueur.Poste.libelle</p>
-                <p class="w-2/12 p-2 text-center text-white-bis">@itemJoueur.age</p>
-                <div class="w-4/12 px-2">
+                <h2 class="w-3/12 p-2">
+                    <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })">@joueur.nom</a>
+                </h2>
+                <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })" class="block w-3/12 p-2 font-light text-white-bis">@joueur.Poste.libelle</a>
+                <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })" class="block w-2/12 p-2 text-center text-white-bis">@joueur.age</a>
+                <a href="@Url.Action("Details", "Equipes", new { id = joueur.Equipe.Id })" class="block w-4/12 px-2">
                     <div class="flex items-center py-1">
-                        <img src="@itemJoueur.Equipe.figure" alt="Logo @itemJoueur.Equipe.nom" class="h-6 w-6 mr-3">
-                        <h3 class="text-white-bis font-light">@itemJoueur.Equipe.nom</h3>
+                        <img src="@joueur.Equipe.figure" alt="Logo @joueur.Equipe.nom" class="h-6 w-6 mr-3">
+                        <h3 class="text-white-bis font-light">@joueur.Equipe.nom</h3>
                     </div>
-                </div>
+                </a>
             </article>
+
+            }
+            
+            @if (Model.Count() == 0) {
+
+            <div class="px-8 py-32 text-center text-white-bis bg-grey-darker">
+                <h1 class="text-4xl font-semibold m-4">Aucun résultat pour @ViewBag.search</h1>
+                <a href="@Url.Action("Index", "Joueurs")" class="block text-white-bis text-white-bis font-light">Voir tous les joueurs</a>
+            </div>
 
             }
 
