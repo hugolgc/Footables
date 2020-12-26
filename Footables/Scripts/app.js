@@ -19,4 +19,8 @@ $(() => {
         })
     })
 
+    $.get('Joueurs/Search', data => {
+        console.log(data)
+    })
+
 })

@@ -10,7 +10,8 @@ using Footables.Models;
 
 namespace Footables.Controllers
 {
-    public partial class MainEquipe
+    // Méthdode Classement
+    public partial class EquipeRanking
     {
         public int Id
         {
@@ -48,14 +49,15 @@ namespace Footables.Controllers
              * Une grosse erreur de sérialisation empêche d'utiliser :
              * db.Equipe.OrderByDescending(e => e.points).ToList();
              * 
-             * En utilisant MainEquipe comme alternative à peu près élégante, je récupère
-             * uniquement le contenu nécéssaire, et non les autres entités lié à Equipe.
+             * En utilisant une classe (ici EquipeRanking) comme alternative à peu près
+             * élégante, je récupère uniquement le contenu nécéssaire, et non les autres
+             * entités lié à Equipe : les Include() ne permettent pas de contrer l'erreur.
              * 
              * Néanmoins, ça serait avec plaisir d'avoir votre explication ^^
              */
 
             var equipes = from equipe in db.Equipe
-                          select new MainEquipe
+                          select new EquipeRanking
                           {
                               Id = equipe.Id,
                               Figure = equipe.figure,

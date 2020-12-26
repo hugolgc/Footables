@@ -10,6 +10,21 @@ using Footables.Models;
 
 namespace Footables.Controllers
 {
+    // [VOIR CONTRÔLEUR EQUIPES]
+    public partial class JoueurSearch
+    {
+        public int Id
+        {
+            get;
+            set;
+        }
+
+        public string Nom
+        {
+            get;
+            set;
+        }
+    }
     public class JoueursController : Controller
     {
         private DatabaseEntities db = new DatabaseEntities();
@@ -19,16 +34,64 @@ namespace Footables.Controllers
         {
             List<Joueur> joueurs = new List<Joueur>();
             Random rand = new Random(DateTime.Now.ToString().GetHashCode());
-
             int count = db.Joueur.Count();
 
-            for (int i = 0; i < count; i++)
+            foreach (Joueur joueur in db.Joueur.ToList())
             {
                 joueurs.Add(db.Joueur.Find(rand.Next(0, (count))));
             }
-
             return View(joueurs.Take(10));
         }
+
+        // POST: Joueurs
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+            if (search == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var joueurs = db.Joueur.Where(joueur => joueur.nom.Contains(search));
+
+            return View(joueurs.Take(10).ToList());
+        }
+
+        /*public ActionResult Index(string? search)
+        {
+            List<Joueur> joueurs = new List<Joueur>();
+
+            if (search == null)
+            {
+                int count = db.Joueur.Count();
+                Random rand = new Random(DateTime.Now.ToString().GetHashCode());
+                foreach (Joueur joueur in db.Joueur.ToList())
+                {
+                    joueurs.Add(db.Joueur.Find(rand.Next(0, (count))));
+                }
+            }
+            else
+            {
+                foreach (Joueur joueur in db.Joueur.ToList())
+                {
+                    if (joueur.nom == "Elliott Vega")
+                    {
+                        joueurs.Add(joueur);
+                    }
+                }
+            }
+
+            return View(joueurs.Take(10));
+
+            if (search != null)
+            {
+                ViewBag.gets = search;
+            }
+            else
+            {
+                ViewBag.gets = "rien";
+            }
+        }*/
 
         // GET: Joueurs/Details/5
         public ActionResult Details(int? id)
