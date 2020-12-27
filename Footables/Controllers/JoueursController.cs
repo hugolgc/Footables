@@ -10,8 +10,8 @@ using Footables.Models;
 
 namespace Footables.Controllers
 {
-    // [VOIR CONTRÔLEUR EQUIPES]
-    public partial class JoueurSearch
+    // [VOIR] Equipes/Classement
+    public partial class JoueurListe
     {
         public int Id
         {
@@ -20,6 +20,12 @@ namespace Footables.Controllers
         }
 
         public string Nom
+        {
+            get;
+            set;
+        }
+
+        public string Figure
         {
             get;
             set;
@@ -55,41 +61,22 @@ namespace Footables.Controllers
             return View(db.Joueur.Where(joueur => joueur.nom.Contains(search)));
         }
 
-        /*public ActionResult Index(string? search)
+        // GET: Joueur/Liste
+        public JsonResult Liste()
         {
-            List<Joueur> joueurs = new List<Joueur>();
 
-            if (search == null)
-            {
-                int count = db.Joueur.Count();
-                Random rand = new Random(DateTime.Now.ToString().GetHashCode());
-                foreach (Joueur joueur in db.Joueur.ToList())
-                {
-                    joueurs.Add(db.Joueur.Find(rand.Next(0, (count))));
-                }
-            }
-            else
-            {
-                foreach (Joueur joueur in db.Joueur.ToList())
-                {
-                    if (joueur.nom == "Elliott Vega")
-                    {
-                        joueurs.Add(joueur);
-                    }
-                }
-            }
+            // [VOIR] Equipes/Classement
 
-            return View(joueurs.Take(10));
+            var joueurs = from joueur in db.Joueur
+                          select new JoueurListe
+                          {
+                              Id = joueur.Id,
+                              Nom = joueur.nom,
+                              Figure = joueur.Equipe.figure
+                          };
 
-            if (search != null)
-            {
-                ViewBag.gets = search;
-            }
-            else
-            {
-                ViewBag.gets = "rien";
-            }
-        }*/
+            return Json(joueurs, JsonRequestBehavior.AllowGet);
+        }
 
         // GET: Joueurs/Details/5
         public ActionResult Details(int? id)
