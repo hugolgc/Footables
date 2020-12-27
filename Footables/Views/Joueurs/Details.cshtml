@@ -1,10 +1,372 @@
 ﻿@model Footables.Models.Joueur
 
 @{
-    ViewBag.Title = "Joueurs";
+    ViewBag.Title = Model.nom;
 }
 
-<h2>Details</h2>
+<article class="px-4">
+    <div class="py-4">
+        <header class="flex justify-between items-center p-8 bg-grey rounded-xl overflow-hidden">
+            <div>
+                <h1 class="text-5xl font-semibold mb-4">@Model.nom</h1>
+                <p class="text-3xl text-white-bis font-light">@Model.Poste.libelle de @Model.age ans</p>
+            </div>
+            <div>
+                <img src="@Model.Equipe.figure" alt="Logo @Model.Equipe.nom " class="h-28 mx-auto">
+            </div>
+        </header>
+    </div>
+
+
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <div class="px-8 py-6 flex justify-between items-center border-b border-grey">
+                <h2 class="text-white-bis text-2xl font-semibold">Statistiques</h2>
+                <p id="playerChange" class="text-indigo-400 text-xs font-bold cursor-pointer">VOIR AU FORMAT TEXTE</p>
+            </div>
+            <div id="radarContainer" class="p-8 bg-grey-bis">
+                <canvas id="radar"></canvas>
+            </div>
+            <div id="playerStats" class="hidden">
+                <ul class="grid grid-cols-2 gap-8 p-8 bg-grey-bis">
+
+                    @if (Model.id_poste == 1) {
+
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.but).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">buts marqués</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.decisive).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">passes décisives</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.tir).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tirs</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.cadre).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tirs cadrés</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.interception).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">interceptions</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.jaune).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.rouge).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+
+                    } else if (Model.id_poste == 2) {
+
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.tir).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tirs</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.cadre).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tirs cadrés</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.interception).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">interceptions</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.faute).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">fautes</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.jaune).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.rouge).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+
+                    } else if (Model.id_poste == 3) {
+
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.interception).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">interceptions</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.tacle).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tacles</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.faute).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">fautes</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.jaune).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.rouge).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+
+                    } else if (Model.id_poste == 4) {
+
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.interception).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">interceptions</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.tacle).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">tacles</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.faute).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">fautes</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.jaune).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.rouge).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+
+                    } else if (Model.id_poste == 5) {
+
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.tir).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">dégagements</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.arret).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">arrêts</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.encaisse).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">buts encaissés</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.jaune).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+                        <li class="col-span-1">
+                            <span class="text-6xl mr-2">@Model.StatJoueur.Select(stat => stat.rouge).Sum()</span>
+                            <span class="text-white-bis text-2xl font-light">cartons rouges</span>
+                        </li>
+
+                    }
+
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const init = {
+
+        @if (Model.id_poste == 1) {
+
+            @: labels: ['Buts marques', 'Passes decisives', 'Tirs', 'Tirs cadres', 'Interceptions', 'Carton Jaune', 'Carton rouge'],
+            @: datasets: [{
+                @: data:[@Model.StatJoueur.Select(stat => stat.but).Sum(), @Model.StatJoueur.Select(stat => stat.decisive).Sum(), @Model.StatJoueur.Select(stat => stat.tir).Sum(), @Model.StatJoueur.Select(stat => stat.cadre).Sum(), @Model.StatJoueur.Select(stat => stat.interception).Sum(), @Model.StatJoueur.Select(stat => stat.jaune).Sum(), @Model.StatJoueur.Select(stat => stat.rouge).Sum()],
+
+        } else if (Model.id_poste == 2) {
+
+            @: labels: ['Tirs', 'Tirs cadres', 'Interceptions', 'Interceptions', 'Fautes', 'Carton Jaune', 'Carton rouge'],
+            @: datasets: [{
+                @: data:[@Model.StatJoueur.Select(stat => stat.tir).Sum(), @Model.StatJoueur.Select(stat => stat.cadre).Sum(), @Model.StatJoueur.Select(stat => stat.interception).Sum(), @Model.StatJoueur.Select(stat => stat.faute).Sum(), @Model.StatJoueur.Select(stat => stat.jaune).Sum(), @Model.StatJoueur.Select(stat => stat.rouge).Sum()],
+
+        } else if (Model.id_poste == 3) {
+
+            @: labels: ['Interceptions', 'Tacles', 'Fautes', 'Carton Jaune', 'Carton rouge'],
+            @: datasets: [{
+                @: data:[@Model.StatJoueur.Select(stat => stat.interception).Sum(), @Model.StatJoueur.Select(stat => stat.tacle).Sum(), @Model.StatJoueur.Select(stat => stat.faute).Sum(), @Model.StatJoueur.Select(stat => stat.jaune).Sum(), @Model.StatJoueur.Select(stat => stat.rouge).Sum()],
+
+        } else if (Model.id_poste == 4) {
+
+            @: labels: ['Interceptions', 'Tacles', 'Fautes', 'Carton Jaune', 'Carton rouge'],
+            @: datasets: [{
+                @: data:[@Model.StatJoueur.Select(stat => stat.interception).Sum(), @Model.StatJoueur.Select(stat => stat.tacle).Sum(), @Model.StatJoueur.Select(stat => stat.faute).Sum(), @Model.StatJoueur.Select(stat => stat.jaune).Sum(), @Model.StatJoueur.Select(stat => stat.rouge).Sum()],
+
+        } else if (Model.id_poste == 5) {
+
+            @: labels:['Dégagements', 'Arrêt de but', 'But encaissé', 'Carton Jaune', 'Carton rouge'],
+            @: datasets: [{
+                @: data:[@Model.StatJoueur.Select(stat => stat.tir).Sum(), @Model.StatJoueur.Select(stat => stat.arret).Sum(), @Model.StatJoueur.Select(stat => stat.encaisse).Sum(), @Model.StatJoueur.Select(stat => stat.jaune).Sum(), @Model.StatJoueur.Select(stat => stat.rouge).Sum()],
+
+        }
+
+                backgroundColor: 'rgba(77, 72, 174, .5)',
+                borderColor: '#635dd4',
+                label: '',
+                pointRotation: 20
+            }]
+        }
+
+        const set = {
+            scale: {
+                angleLines: {
+                    display: false
+                },
+                ticks: {
+                    suggestedMin: 0
+                },
+                pointLabels: {
+                    fontSize: 16,
+                    fontColor: 'rgba(255, 255, 255, .5)'
+                }
+            },
+            legend: {
+                display: false
+            }
+        }
+
+        const radar = new Chart(document.getElementById('radar').getContext('2d'), {
+            type: 'radar',
+            data: init,
+            options: set
+        })
+
+        document.getElementById('radar').style.width = window.innerWidth - 1000 + 'px';
+    </script>
+
+
+@*  <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Statistiques</h2>
+            <ul class="grid grid-cols-2 gap-8 p-8 bg-grey-bis">
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">18</span>
+                    <span class="text-white-bis text-2xl font-light">buts marqués</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">23</span>
+                    <span class="text-white-bis text-2xl font-light">passes décisives</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">45</span>
+                    <span class="text-white-bis text-2xl font-light">tirs</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">35</span>
+                    <span class="text-white-bis text-2xl font-light">tirs cadrés</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl">78</span>
+                    <span class="text-white-bis text-2xl font-light">% de précision</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">13</span>
+                    <span class="text-white-bis text-2xl font-light">interceptions</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">3</span>
+                    <span class="text-white-bis text-2xl font-light">cartons jaunes</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">1</span>
+                    <span class="text-white-bis text-2xl font-light">carton rouge</span>
+                </li>
+            </ul>
+        </div>
+    </div>*@
+
+
+    <!--<div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Derniers matchs</h2>
+            <div class="flex items-center p-2 text-white-bis text-center font-light border-b border-grey-dark">
+                <p class="w-2/12 px-2">Date</p>
+                <p class="w-2/12 px-2">Score</p>
+                <p class="w-4/12 px-2">Match</p>
+                <p class="w-4/12 px-2">Cotes</p>
+            </div>-->
+
+            @*@foreach (var match in Model.StatJoueur.Where(stat => stat.id_joueur == Model.Id).ToList()) {
+
+            <a class="block bg-variant" href="@Url.Action("Details", "Matchs", new { id = itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().id_match })">
+                <article class="flex items-center px-2 py-2">
+
+                    @{
+                        DateTime matchDate = Convert.ToDateTime(itemMatch.debut);
+
+                        if (matchDate.ToShortDateString() == DateTime.Now.ToShortDateString()) {
+
+                            <p class="w-2/12 p-2 text-center font-light">@matchDate.ToShortTimeString()</p>
+
+                        } else {
+
+                            <p class="w-2/12 p-2 text-center font-light">@matchDate.ToString("dd MMMM")</p>
+
+                        }
+                    }
+
+                    @if (itemMatch.fin == null) {
+
+                        <p class="w-2/12 p-2 text-center font-light">- : -</p>
+
+                    } else {
+
+                        <p class="w-2/12 px-2 text-center text-xl">
+                            <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().but</span>
+                            <span class="block">@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().but</span>
+                        </p>
+
+                    }
+
+                    <div class="w-4/12 px-2">
+                        <div class="flex items-center py-1">
+                            <img src="@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.figure" alt="Logo @itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.nom" class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">@itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.nom</h3>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <img src="@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.figure" alt="Logo @itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.nom" class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">@itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.nom</h3>
+                        </div>
+                    </div>
+
+                    @{ List<double> cotes = Footables.Models.Utils.getCotes(itemMatch.StatEquipe.Where(stat => stat.domicile == 1).First().Equipe.niveau, itemMatch.StatEquipe.Where(stat => stat.domicile == 0).First().Equipe.niveau); }
+
+                    <div class="w-4/12 px-2 flex justify-center text-sm">
+                        <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-md">@Math.Round(cotes[0], 2)</p>
+                        <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-md mx-4">@Math.Round(cotes[1], 2)</p>
+                        <p class="w-14 h-10 flex items-center justify-center bg-grey border-2 border-grey-bis rounded-mdm">@Math.Round(cotes[2], 2)</p>
+                    </div>
+                </article>
+            </a>
+            
+            }*@
+
+            <!--<div class="flex items-center px-2 py-2 bg-variant">
+                <p class="w-2/12 p-2 text-center font-light">Jeudi</p>
+                <p class="w-2/12 px-2 text-center text-xl">
+                    <span class="block">1</span>
+                    <span class="block">2</span>
+                </p>
+                <div class="w-4/12 px-2">
+                    <div class="flex items-center py-1">
+                        <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
+                        <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                    </div>
+                    <div class="flex items-center py-1">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg" alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                        <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                    </div>
+                </div>
+                <div class="w-4/12 px-2 flex justify-center">
+                    <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                    <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                    <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</article>-->
+
+@*<h2>Details</h2>
 
 <div>
     <h4>Joueur</h4>
@@ -47,4 +409,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

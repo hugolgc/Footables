@@ -11,7 +11,7 @@ using Footables.Models;
 namespace Footables.Controllers
 {
     // Méthdode Classement
-    public partial class EquipeRanking
+    public partial class EquipeClassement
     {
         public int Id
         {
@@ -49,7 +49,7 @@ namespace Footables.Controllers
              * Une grosse erreur de sérialisation empêche d'utiliser :
              * db.Equipe.OrderByDescending(e => e.points).ToList();
              * 
-             * En utilisant une classe (ici EquipeRanking) comme alternative à peu près
+             * En utilisant une classe (ici EquipeClassement) comme alternative à peu près
              * élégante, je récupère uniquement le contenu nécéssaire, et non les autres
              * entités lié à Equipe : les Include() ne permettent pas de contrer l'erreur.
              * 
@@ -57,7 +57,7 @@ namespace Footables.Controllers
              */
 
             var equipes = from equipe in db.Equipe
-                          select new EquipeRanking
+                          select new EquipeClassement
                           {
                               Id = equipe.Id,
                               Figure = equipe.figure,
@@ -79,7 +79,7 @@ namespace Footables.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Equipe equipe = db.Equipe.Find(id);
             if (equipe == null)
@@ -90,15 +90,15 @@ namespace Footables.Controllers
         }
 
         // GET: Equipes/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             return View();
-        }
+        }*/
 
         // POST: Equipes/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,nom,acronyme,points,niveau,figure")] Equipe equipe)
         {
@@ -110,10 +110,10 @@ namespace Footables.Controllers
             }
 
             return View(equipe);
-        }
+        }*/
 
         // GET: Equipes/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -125,12 +125,12 @@ namespace Footables.Controllers
                 return HttpNotFound();
             }
             return View(equipe);
-        }
+        }*/
 
         // POST: Equipes/Edit/5
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,nom,acronyme,points,niveau,figure")] Equipe equipe)
         {
@@ -141,10 +141,10 @@ namespace Footables.Controllers
                 return RedirectToAction("Index");
             }
             return View(equipe);
-        }
+        }*/
 
         // GET: Equipes/Delete/5
-        public ActionResult Delete(int? id)
+        /*public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -156,10 +156,10 @@ namespace Footables.Controllers
                 return HttpNotFound();
             }
             return View(equipe);
-        }
+        }*/
 
         // POST: Equipes/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /*[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -167,7 +167,7 @@ namespace Footables.Controllers
             db.Equipe.Remove(equipe);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

@@ -16,7 +16,7 @@ namespace Footables.Controllers
             return View(db.Match.OrderByDescending(match => match.debut).Take(5).ToList());
         }
 
-        public ActionResult About()
+        /*public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
 
@@ -28,6 +28,6 @@ namespace Footables.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
-        }
+        }*/
     }
 }

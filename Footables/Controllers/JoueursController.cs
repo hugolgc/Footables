@@ -83,7 +83,7 @@ namespace Footables.Controllers
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return RedirectToAction("Index");
             }
             Joueur joueur = db.Joueur.Find(id);
             if (joueur == null)
@@ -94,17 +94,17 @@ namespace Footables.Controllers
         }
 
         // GET: Joueurs/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             ViewBag.id_equipe = new SelectList(db.Equipe, "Id", "nom");
             ViewBag.id_poste = new SelectList(db.Poste, "Id", "libelle");
             return View();
-        }
+        }*/
 
         // POST: Joueurs/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,nom,age,id_equipe,id_poste")] Joueur joueur)
         {
@@ -118,10 +118,10 @@ namespace Footables.Controllers
             ViewBag.id_equipe = new SelectList(db.Equipe, "Id", "nom", joueur.id_equipe);
             ViewBag.id_poste = new SelectList(db.Poste, "Id", "libelle", joueur.id_poste);
             return View(joueur);
-        }
+        }*/
 
         // GET: Joueurs/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -135,12 +135,12 @@ namespace Footables.Controllers
             ViewBag.id_equipe = new SelectList(db.Equipe, "Id", "nom", joueur.id_equipe);
             ViewBag.id_poste = new SelectList(db.Poste, "Id", "libelle", joueur.id_poste);
             return View(joueur);
-        }
+        }*/
 
         // POST: Joueurs/Edit/5
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,nom,age,id_equipe,id_poste")] Joueur joueur)
         {
@@ -153,10 +153,10 @@ namespace Footables.Controllers
             ViewBag.id_equipe = new SelectList(db.Equipe, "Id", "nom", joueur.id_equipe);
             ViewBag.id_poste = new SelectList(db.Poste, "Id", "libelle", joueur.id_poste);
             return View(joueur);
-        }
+        }*/
 
         // GET: Joueurs/Delete/5
-        public ActionResult Delete(int? id)
+        /*public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -168,10 +168,10 @@ namespace Footables.Controllers
                 return HttpNotFound();
             }
             return View(joueur);
-        }
+        }*/
 
         // POST: Joueurs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /*[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -179,7 +179,7 @@ namespace Footables.Controllers
             db.Joueur.Remove(joueur);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

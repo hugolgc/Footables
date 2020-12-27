@@ -18,6 +18,8 @@ namespace Footables
                 "~/Scripts/jquery.min.js",
                 "~/Scripts/swiper.min.js",
                 "~/Scripts/app.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/chart").Include("~/Scripts/chart.min.js"));
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Footables.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: StatJoueurs
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             var statJoueur = db.StatJoueur.Include(s => s.Joueur).Include(s => s.Match);
             return View(statJoueur.ToList());
@@ -122,7 +122,7 @@ namespace Footables.Controllers
             db.StatJoueur.Remove(statJoueur);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

@@ -37,15 +37,15 @@ namespace Footables.Controllers
         }
 
         // GET: Matchs/Create
-        public ActionResult Create()
+        /*public ActionResult Create()
         {
             return View();
-        }
+        }*/
 
         // POST: Matchs/Create
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,debut,fin,lieu")] Match match)
         {
@@ -57,10 +57,10 @@ namespace Footables.Controllers
             }
 
             return View(match);
-        }
+        }*/
 
         // GET: Matchs/Edit/5
-        public ActionResult Edit(int? id)
+        /*public ActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -72,12 +72,12 @@ namespace Footables.Controllers
                 return HttpNotFound();
             }
             return View(match);
-        }
+        }*/
 
         // POST: Matchs/Edit/5
         // Afin de déjouer les attaques par survalidation, activez les propriétés spécifiques auxquelles vous voulez établir une liaison. Pour 
         // plus de détails, consultez https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        /*[HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "Id,debut,fin,lieu")] Match match)
         {
@@ -88,10 +88,10 @@ namespace Footables.Controllers
                 return RedirectToAction("Index");
             }
             return View(match);
-        }
+        }*/
 
         // GET: Matchs/Delete/5
-        public ActionResult Delete(int? id)
+        /*public ActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -103,10 +103,10 @@ namespace Footables.Controllers
                 return HttpNotFound();
             }
             return View(match);
-        }
+        }*/
 
         // POST: Matchs/Delete/5
-        [HttpPost, ActionName("Delete")]
+        /*[HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
@@ -114,7 +114,7 @@ namespace Footables.Controllers
             db.Match.Remove(match);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

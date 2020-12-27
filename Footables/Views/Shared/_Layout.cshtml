@@ -1,12 +1,13 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Footables | @ViewBag.Title</title>
-        @Styles.Render("~/Content/css")
-    </head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Footables | @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/chart")
+</head>
     <body class="genesis bg-grey-dark text-white">
 
 
@@ -31,24 +32,9 @@
                 </ul>
                 <div class="relative h-10 px-4 items-center bg-grey rounded-lg hidden lg:flex">
                     <ion-icon name="search-outline" class="pt-1 pr-3 text-lg"></ion-icon>
-                    <input id="search" name="search" type="text" placeholder="Joueur, équipe" maxlength="50" class="h-10 w-48 text-sm font-light bg-transparent outline-none">
-                    <div class="hidden absolute top-12 left-0 right-0 bg-grey-darker border border-grey divide-y divide-gray-700 rounded-lg shadow-2xl">
-                        <ul class="px-4 py-3">
-                            <li>
-                                <a href="" class="block flex items-center py-1">
-                                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
-                                    <h3 class="text-white font-light">Hugo Lagache</h3>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="px-4 py-3">
-                            <li>
-                                <a href="" class="block flex items-center py-1">
-                                    <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
-                                    <h3 class="text-white font-light">PSG</h3>
-                                </a>
-                            </li>
-                        </ul>
+                    <input id="search" name="search" type="text" placeholder="Trouver un joueur" maxlength="50" class="h-10 w-48 text-sm font-light bg-transparent outline-none">
+                    <div id="searchContainer" class="hidden">
+                        <ul id="resultsJoueurs" class="px-4 py-3"></ul>
                     </div>
                 </div>
             </nav>
@@ -64,7 +50,7 @@
                         <section class="px-4 py-2 bg-grey rounded-xl">
                             <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
                                 <h2 class="font-medium">@Html.ActionLink("Classement", "Index", "Equipes")</h2>
-                                <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
+                                <ion-icon name="trophy-outline" class="pt-1 text-lg"></ion-icon>
                             </header>
                             <div id="ranking">
 
@@ -84,8 +70,8 @@
                         </section>
                     </div>
 
-                    <div class="p-4">
-                        <div class="swiper-container bg-grey rounded-xl">
+                    @*<div class="p-4">
+                        <div id="homeSlider" class="swiper-container bg-grey rounded-xl">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
                                     <section class="px-4 py-2">
@@ -150,7 +136,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>*@
 
                 </div>
                 <div class="flex-auto">
@@ -162,33 +148,47 @@
             <aside class="w-80 min-h-content sticky top-73 p-4 flex-none bg-grey-darker border-l border-grey hidden xl:block">
 
                 <div class="p-4">
-                    <section class="px-4 py-2 bg-grey rounded-xl">
-                        <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
-                            <h2 class="font-medium">Country</h2>
-                            <ion-icon name="ellipsis-horizontal" class="pt-1 text-lg"></ion-icon>
-                        </header>
-                        <div class="py-2 flex justify-between items-center animate-pulse">
-                            <div class="flex items-center">
-                                <div class="h-6 w-6 bg-purple-gradient rounded-full mr-3"></div>
-                                <div class="h-2 w-24 bg-purple-gradient rounded-full"></div>
+                    <div id="homeSlider" class="swiper-container bg-grey rounded-xl">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <section class="px-4 py-2">
+                                    <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                        <h2 class="font-medium">Bienvenu !</h2>
+                                        <div class="flex item-center text-indigo-400">
+                                            <span class="text-xs font-bold pr-1">GLISSER</span>
+                                            <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+                                        </div>
+                                    </header>
+                                    <article class="py-2">
+                                        <p class="text-white-bis font-light">Tout d'abord on espère vous trouverez le projet sympa. Dans le code, beaucoup de choses sont commentées, nous avons été ambitieux et tenté d'aller plus loin que de proposer des graphiques...</p>
+                                    </article>
+                                </section>
                             </div>
-                            <div class="h-4 w-8 bg-purple-gradient rounded-full"></div>
+                            <div class="swiper-slide">
+                                <section class="px-4 py-2">
+                                    <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                        <h2 class="font-medium">Luca & Hugo</h2>
+                                        <div class="flex item-center text-indigo-400">
+                                            <ion-icon name="arrow-forward" class="text-lg"></ion-icon>
+                                        </div>
+                                    </header>
+                                    <article class="py-2">
+                                        <p class="text-white-bis font-light">mais le temps nous a rattrapés. Par ailleurs la base de données contient peu de contenu. En revanche le projet est assez complet : allant du formulaire aux requêtes ajax, en passant par les sliders...</p>
+                                    </article>
+                                </section>
+                            </div>
+                            <div class="swiper-slide">
+                                <section class="px-4 py-2">
+                                    <header class="pt-1 pb-3 flex justify-between items-center text-white-bis">
+                                        <h2 class="font-medium">Amusez-vous !</h2>
+                                    </header>
+                                    <article class="py-2">
+                                        <p class="text-white-bis font-light"> et les graphiques. On a vraiment été intéressé par l'ASP.NET et on a joué le jeu. On a encore pas mal de questions pour aller plus loin !</p>
+                                    </article>
+                                </section>
+                            </div>
                         </div>
-                        <article class="py-2 flex justify-between items-center">
-                            <div class="flex items-center">
-                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
-                                <h3 class="text-white font-light">France</h3>
-                            </div>
-                            <p class="text-white-bis">322</p>
-                        </article>
-                        <article class="py-2 flex justify-between items-center">
-                            <div class="flex items-center">
-                                <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain" class="h-6 w-6 mr-3">
-                                <h3 class="text-white font-light">France</h3>
-                            </div>
-                            <p class="text-white-bis">322</p>
-                        </article>
-                    </section>
+                    </div>
                 </div>
 
             </aside>

@@ -204,6 +204,7 @@
       <DependentUpon>Model.edmx</DependentUpon>
     </Content>
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\chart.min.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\swiper.min.js" />
     <Content Include="Web.config" />

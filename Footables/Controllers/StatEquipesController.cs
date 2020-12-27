@@ -15,7 +15,7 @@ namespace Footables.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: StatEquipes
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             var statEquipe = db.StatEquipe.Include(s => s.Equipe).Include(s => s.Match);
             return View(statEquipe.ToList());
@@ -135,7 +135,7 @@ namespace Footables.Controllers
             db.StatEquipe.Remove(statEquipe);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

@@ -4,55 +4,206 @@
     ViewBag.Title = Model.nom;
 }
 
-<h2>Details</h2>
+<article class="px-4">
+    <div class="py-4">
+        <header class="flex justify-between items-center p-8 bg-grey rounded-xl overflow-hidden">
+            <div>
+                <h1 class="text-5xl font-semibold mb-4">@Model.nom</h1>
+                <p class="text-3xl text-white-bis font-light">@Model.Joueur.Count() joueurs et @Model.points points</p>
+            </div>
+            <div>
+                <img src="@Model.figure" alt="Logo @Model.nom" class="h-28 mx-auto">
+            </div>
+        </header>
+    </div>
 
-<div>
-    <h4>Equipe</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.nom)
-        </dt>
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Pourcentages</h2>
+            <div class="p-8 bg-grey-bis">
+                <canvas id="pie"></canvas>
+            </div>
+        </div>
+    </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.nom)
-        </dd>
+    <script>
+        new Chart(document.getElementById('pie'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Victoires', 'Nuls', 'Défaites'],
+                datasets: [{
+                    backgroundColor: ['rgba(93, 86, 214, .7)', 'rgba(77, 72, 174, .5)', 'rgba(71, 67, 145, .3)'],
+                    borderColor: '#635dd4',
+                    data: [@Model.StatEquipe.Select(stat => stat.etat).Where(etat => etat == 2).Count(), @Model.StatEquipe.Select(stat => stat.etat).Where(etat => etat == 0).Count(), @Model.StatEquipe.Select(stat => stat.etat).Where(etat => etat == 1).Count()]
+                }]
+            },
+            options: {
+                title: {
+                    display: false
+                }
+            }
+        })
 
-        <dt>
-            @Html.DisplayNameFor(model => model.acronyme)
-        </dt>
+        document.getElementById('pie').style.width = window.innerWidth - 1000 + 'px';
+    </script>
 
-        <dd>
-            @Html.DisplayFor(model => model.acronyme)
-        </dd>
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Statistiques</h2>
+            <ul class="grid grid-cols-2 gap-8 p-8 bg-grey-bis">
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">@Model.StatEquipe.Select(stat => stat.but).Sum()</span>
+                    <span class="text-white-bis text-2xl font-light">buts marqués</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl">@Model.StatEquipe.Select(stat => stat.possession).Average()</span>
+                    <span class="text-white-bis text-2xl font-light">% de possession</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl mr-2">@Model.StatEquipe.Select(stat => stat.hors_jeu).Sum()</span>
+                    <span class="text-white-bis text-2xl font-light">hors-jeu</span>
+                </li>
+                <li class="col-span-1">
+                    <span class="text-6xl">@Model.StatEquipe.Select(stat => stat.corner).Sum()</span>
+                    <span class="text-white-bis text-2xl font-light">corners</span>
+                </li>
+            </ul>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.points)
-        </dt>
+    <div class="py-4">
+        <div class="bg-grey rounded-xl overflow-hidden">
+            <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Compositions</h2>
+            <ul class="grid grid-cols-2 gap-8 p-8 bg-grey-bis">
 
-        <dd>
-            @Html.DisplayFor(model => model.points)
-        </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.niveau)
-        </dt>
+                @foreach (var joueur in Model.Joueur.ToList()) {
 
-        <dd>
-            @Html.DisplayFor(model => model.niveau)
-        </dd>
+                <a href="@Url.Action("Details", "Joueurs", new { id = joueur.Id })">
+                    <li class="col-span-1">
+                        <p class="text-white-bis font-light">@joueur.Poste.libelle</p>
+                        <h3 class="text-lg font-semibold">@joueur.nom</h3>
+                    </li>
+                </a>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.figure)
-        </dt>
+                }
 
-        <dd>
-            @Html.DisplayFor(model => model.figure)
-        </dd>
+            </ul>
+        </div>
+    </div>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+    @*<div class="py-4">
+            <div class="bg-grey rounded-xl overflow-hidden">
+                <h2 class="px-8 py-6 text-white-bis text-2xl font-semibold border-b border-grey">Derniers matchs</h2>
+                <div class="flex items-center p-2 text-white-bis text-center font-light border-b border-grey-dark">
+                    <p class="w-2/12 px-2">Date</p>
+                    <p class="w-2/12 px-2">Score</p>
+                    <p class="w-4/12 px-2">Match</p>
+                    <p class="w-4/12 px-2">Cotes</p>
+                </div>
+                <div class="flex items-center px-2 py-2 bg-variant">
+                    <p class="w-2/12 p-2 text-center font-light">22:00</p>
+                    <p class="w-2/12 px-2 text-center text-xl">
+                        <span class="block">1</span>
+                        <span class="block">2</span>
+                    </p>
+                    <div class="w-4/12 px-2">
+                        <div class="flex items-center py-1">
+                            <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain"
+                                 class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg"
+                                 alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                        </div>
+                    </div>
+                    <div class="w-4/12 px-2 flex justify-center">
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                    </div>
+                </div>
+                <div class="flex items-center px-2 py-2 bg-variant">
+                    <p class="w-2/12 p-2 text-center font-light">Jeudi</p>
+                    <p class="w-2/12 px-2 text-center text-xl">
+                        <span class="block">1</span>
+                        <span class="block">2</span>
+                    </p>
+                    <div class="w-4/12 px-2">
+                        <div class="flex items-center py-1">
+                            <img src="https://futhead.cursecdn.com/static/img/17/clubs/73.png" alt="Logo Paris Saint-Germain"
+                                 class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">Paris Saint-Germain</h3>
+                        </div>
+                        <div class="flex items-center py-1">
+                            <img src="https://upload.wikimedia.org/wikipedia/fr/archive/4/43/20200407190016%21Logo_Olympique_de_Marseille.svg"
+                                 alt="Logo Olympique de Marseille" class="h-6 w-6 mr-3">
+                            <h3 class="text-white-bis font-light">Olympique de Marseille</h3>
+                        </div>
+                    </div>
+                    <div class="w-4/12 px-2 flex justify-center">
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm mx-4">1.30</p>
+                        <p class="px-4 py-2 bg-grey border-2 border-grey-bis rounded-md text-sm">1.30</p>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+</article>
+
+
+@*<h2>Details</h2>
+
+    <div>
+        <h4>Equipe</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.nom)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.nom)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.acronyme)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.acronyme)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.points)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.points)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.niveau)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.niveau)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.figure)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.figure)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

@@ -15,7 +15,7 @@ namespace Footables.Controllers
         private DatabaseEntities db = new DatabaseEntities();
 
         // GET: Postes
-        public ActionResult Index()
+        /*public ActionResult Index()
         {
             return View(db.Poste.ToList());
         }
@@ -113,7 +113,7 @@ namespace Footables.Controllers
             db.Poste.Remove(poste);
             db.SaveChanges();
             return RedirectToAction("Index");
-        }
+        }*/
 
         protected override void Dispose(bool disposing)
         {

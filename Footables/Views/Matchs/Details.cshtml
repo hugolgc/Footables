@@ -7,13 +7,13 @@
 <article class="px-4">
     <div class="py-4">
         <header class="flex items-center p-8 bg-grey rounded-xl overflow-hidden">
-            <div class="flex-1">
+            <a href="@Url.Action("Details", "Equipes", new { id = @Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.Id })" class="block flex-1">
                 <img src="@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.figure" alt="Logo @Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.nom" class="h-32 mx-auto mb-4">
                 <h2 class="flex justify-center items-center">
                     <ion-icon name="flag-outline" class="pr-2"></ion-icon>
                     <span class="block text-lg font-light">@Model.StatEquipe.Where(equipe => equipe.domicile == 1).First().Equipe.nom</span>
                 </h2>
-            </div>
+            </a>
             <div class="flex-1 text-center">
 
                 @{ DateTime matchDate = Convert.ToDateTime(Model.debut); }
@@ -34,12 +34,12 @@
                 
                 <p class="text-white-bis font-light">@Model.lieu</p>
             </div>
-            <div class="flex-1">
+            <a href="@Url.Action("Details", "Equipes", new { id = @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.Id })" class="block flex-1">
                 <img src="@Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.figure" alt="Logo @Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.nom" class="h-32 mx-auto mb-4">
                 <h2 class="flex justify-center items-center">
                     <span class="block text-lg font-light">@Model.StatEquipe.Where(equipe => equipe.domicile == 0).First().Equipe.nom</span>
                 </h2>
-            </div>
+            </a>
         </header>
     </div>
 
